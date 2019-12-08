@@ -37,33 +37,46 @@ make blink-test-gdb
 
 ### Apps
 
-LoraWAN
-: Periodically send temperature / humidity readings over LoraWAN.
+#### LoraWAN
+Periodically send temperature / humidity readings over LoraWAN.
 Sample is packed using Cayenne Low Power protocol using
 [ivory-tower-cayenne](https://github.com/hexamon-tech/ivory-tower-cayenne)
 library.
 
-Logger
-: Log sensor readings to UART
+To configure RN2483 radio copy
+provided (user.conf.sample)[user.conf.sample]
+to `user.conf`, edit as needed and run `make lorawan` again.
+
+```bash
+cp user.conf.sample user.conf
+```
+
+#### Logger
+Log sensor readings to UART
 
 ### Tests
 
-Blink
-: Blinks red and green LEDs
+#### Blink
 
-Heater
-: Allows control of SI7006 internal heater via UART '0'-'9' characters
+Blinks red and green LEDs
 
-UARTBridge
-: Bridge debug UART to radio modem UART
+#### Heater
+Allows control of SI7006 internal heater via UART '0'-'9' characters
 
-RadioCommand
-: Raw radio command example
+#### UARTBridge
+Bridge debug UART to radio modem UART
+
+#### RadioCommand
+Raw radio command example
 
 ### Flashing
 
 Manually with BlackMagic Probe::
 
 ```bash
-arm-none-eabi-gdb --ex 'target extended-remote /dev/ttyACM0' --ex 'monitor swdp_scan' --ex 'attach 1' --ex 'load' build/lorawan/image
+arm-none-eabi-gdb \
+  --ex 'target extended-remote /dev/ttyACM0' \
+  --ex 'monitor swdp_scan' \
+  --ex 'attach 1' \
+  --ex 'load' build/lorawan/image
 ```
