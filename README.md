@@ -44,7 +44,7 @@ Sample is packed using Cayenne Low Power protocol using
 library.
 
 To configure RN2483 radio copy
-provided (user.conf.sample)[user.conf.sample]
+provided [user.conf.sample](user.conf.sample)
 to `user.conf`, edit as needed and run `make lorawan` again.
 
 ```bash
