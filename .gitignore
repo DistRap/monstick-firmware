@@ -1,0 +1,7 @@
+attic
+build
+result
+user.conf
+.stack-work
+.gdb_history
+.ghc.environment*

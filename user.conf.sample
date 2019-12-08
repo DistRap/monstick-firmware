@@ -1,0 +1,14 @@
+[radio]
+device-eui = "00FFAABBCCDDEEFF"
+activation-mode = "otaa"
+
+[radio.otaa]
+eui = "AAAAAAAAAAAAAAAA"
+key = "BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB"
+
+[radio.abp]
+devaddr = "CCCCCCCC"
+nwkskey = "DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD"
+appskey = "EEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE"
+
+
