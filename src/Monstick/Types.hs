@@ -9,7 +9,7 @@ module Monstick.Types where
 import Ivory.Language
 import Ivory.Tower
 
-[ivory| string struct UARTBuffer 256 |]
+[ivory| string struct UARTBuffer 64 |]
 
 uartTypes :: Module
 uartTypes = package "uartTypes" $ do
