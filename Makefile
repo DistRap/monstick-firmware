@@ -11,8 +11,10 @@ TESTS      := \
 	radiocommand-test \
 	uartbridge-test
 
-CLEANS     := $(foreach test,$(TESTS),$(test)-clean) \
-	            $(foreach test,$(APPS),$(test)_clean)
+CLEANS     :=  \
+	$(foreach test,$(TESTS),$(test)-clean) \
+	$(foreach app,$(APPS),$(app)-clean)
+
 GDB := arm-none-eabi-gdb \
 		--ex 'target extended-remote $(TARGET)' \
 		--ex 'monitor connect_srst disable' \
@@ -20,8 +22,8 @@ GDB := arm-none-eabi-gdb \
 		--ex 'set mem inaccessible-by-default off' \
 		--ex 'attach 1'
 
-.PHONY: test clean $(TESTS) $(AADL_TESTS) $(CLEANS)
-test: $(TESTS) $(AADL_TESTS)
+.PHONY: test clean $(TESTS) $(CLEANS)
+test: $(TESTS)
 clean: $(CLEANS)
 
 define MKTEST
