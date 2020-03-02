@@ -56,7 +56,7 @@ usart2Pins = UARTPins
   }
 
 monstick_cc :: ClockConfig
-monstick_cc = ClockConfig { clockconfig_source = MSI $ 16 * 1000 * 1000 -- HSI16
+monstick_cc = ClockConfig { clockconfig_source = MSI $ 16 * 1000 * 1000
                         , clockconfig_pll    = PLLFactorMNR
                           { pll_mnr_m = 1
                           , pll_mnr_n = 10
