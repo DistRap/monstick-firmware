@@ -47,3 +47,17 @@ data Radio = Radio
   , radioConfig   :: RadioConfig
   , radioResetPin :: GPIOPin
   }
+
+data MikroBUS = MikroBUS {
+    mbUART      :: UART
+  , mbUARTPins  :: UARTPins
+  , mbSPI       :: SPI
+  , mbSPICS     :: GPIOPin
+  , mbSPIPins   :: SPIPins
+  , mbI2C       :: I2C
+  , mbI2CPins   :: I2CPins
+  , mbADC       :: GPIOPin
+  , mbISR       :: GPIOPin
+  , mbPWM       :: GPIOPin
+  , mbRST       :: GPIOPin
+  }

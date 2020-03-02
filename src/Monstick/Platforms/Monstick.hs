@@ -56,6 +56,13 @@ usart2Pins = UARTPins
   , uartPinRx = pinA15
   }
 
+-- mikrobus
+usart3Pins :: UARTPins
+usart3Pins = UARTPins
+  { uartPinTx = pinC10
+  , uartPinRx = pinC11
+  }
+
 monstick_cc :: ClockConfig
 monstick_cc = ClockConfig { clockconfig_source = MSI $ 16 * 1000 * 1000
                         , clockconfig_pll    = PLLFactorMNR
@@ -103,4 +110,43 @@ monstickRadio = Radio {
   , radioUARTPins    = usart1Pins
   , radioConfig      = defaultRadioConfig
   , radioResetPin    = pinC12
+  }
+
+-- | Used by both Mikrobuses
+usart3Pins :: UARTPins
+usart3Pins = UARTPins
+  { uartPinTx = pinC10
+  , uartPinRx = pinC11
+  }
+
+-- | Closer to core (middle, CON1)
+monstickMikrobus1 :: MikroBUS
+monstickMikrobus1 = MikroBUS {
+    mbUART     = usart3
+  , mbUARTPins = usart3Pins
+  , mbSPI      = spi2
+  , mbSPIPins  = spiPins
+  , mbSPICS    = pinB12
+  , mbI2C      = i2c3
+  , mbI2CPins  = i2c3Pins
+  , mbADC      = pinC4 -- ADC2,GPIO12
+  , mbISR      = pinC8 -- GPIO1
+  , mbPWM      = pinA5 -- GPIO8
+  , mbRST      = pinC5
+  }
+
+-- | Edge (CON2)
+monstickMikrobus2 :: MikroBUS
+monstickMikrobus2 = MikroBUS {
+    mbUART     = usart3
+  , mbUARTPins = usart3Pins
+  , mbSPI      = spi2
+  , mbSPIPins  = spiPins
+  , mbSPICS    = pinB9
+  , mbI2C      = i2c1
+  , mbI2CPins  = i2c1Pins
+  , mbADC      = pinA4 -- ADC3,GPIO13
+  , mbISR      = pinC7 -- GPIO2
+  , mbPWM      = pinA8 -- GPIO0
+  , mbRST      = pinB0
   }
