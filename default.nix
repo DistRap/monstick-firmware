@@ -1,8 +1,19 @@
-{ nixpkgs ? import <nixpkgs> {}, compiler ? "ghc881" }:
+{ nixpkgs ? import <nixpkgs> {}, compiler ? "ghc882" }:
 let
-  itn = builtins.fetchTarball https://github.com/HaskellEmbedded/ivory-tower-nix/archive/master.tar.gz;
-  overlays = import "${itn}/overlay.nix" compiler;
-  pkgs = import "${itn}/nixpkgs.nix" { inherit overlays; };
-  src = pkgs.nix-gitignore.gitignoreSource [] ./.;
+  itnSrc = nixpkgs.fetchFromGitHub {
+    owner = "HaskellEmbedded";
+    repo = "ivory-tower-nix";
+    rev = "860fb41b4d489e536634fde23adb808c8cf337f1";
+    sha256 = "043xwy3i1d9m057fyd3n5bmbywqhd8hccdxby6div3hpsbhf966g";
+  };
+
+  itn = import itnSrc { inherit compiler; };
+  src = itn.pkgs.nix-gitignore.gitignoreSource [] ./.;
 in
-  pkgs.myHaskellPackages.callCabal2nix "monstick-firmware" "${src}" {}
+  itn // rec {
+    monstick-firmware =
+      itn.ivorypkgs.callCabal2nix "monstick-firmware" "${src}" {};
+
+    shell = itn.mkShell monstick-firmware;
+  }
+
