@@ -11,7 +11,7 @@ TESTS      := \
 	radiocommand-test \
 	uartbridge-test
 
-CLEANS     :=  \
+CLEANS     := \
 	$(foreach test,$(TESTS),$(test)-clean) \
 	$(foreach app,$(APPS),$(app)-clean)
 
