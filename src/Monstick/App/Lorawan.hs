@@ -86,7 +86,7 @@ app tocc toPlatform = do
     (clearLineCode ++ reset ++ "\r> ") ostream
 
   -- create merged input channel that feeds both
-  -- ostream' and dbgstream
+  -- ostreamRadio and dbgstream
   merged <- ostreamRadio `mergeInputs` dbgstream
 
   (acc, _cmdMode, BackpressureTransmit cmd txdone) <- rn2483Tower

@@ -29,6 +29,7 @@ i2c3Pins :: I2CPins
 i2c3Pins = I2CPins { i2cpins_sda = pinC1
                    , i2cpins_scl = pinC0 }
 
+-- external SPI
 spiPins :: SPIPins
 spiPins = SPIPins
     { spiPinMiso = pinB14
