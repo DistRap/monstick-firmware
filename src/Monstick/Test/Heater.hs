@@ -26,12 +26,13 @@ import Ivory.Tower.Drivers.Temperature.Types
 import Monstick.Types
 
 app :: (e -> ClockConfig)
-    -> (e -> Platform)
+    -> (e -> MonstickPlatform)
     -> Tower e ()
 app tocc toPlatform = do
   monstickTowerDeps
 
-  Platform{..} <- fmap toPlatform getEnv
+  MonstickPlatform{..} <- fmap toPlatform getEnv
+  let Platform{..} = basePlatform
 
   (i2cTransmit, i2cReady) <- i2cTower tocc platformI2C platformI2CPins
 

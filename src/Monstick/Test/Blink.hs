@@ -10,10 +10,10 @@ import Ivory.BSP.STM32.ClockConfig (ClockConfig)
 import Monstick.Platforms
 
 app :: (e -> ClockConfig)
-    -> (e -> Platform)
+    -> (e -> MonstickPlatform)
     -> Tower e ()
 app _tocc toPlatform = do
-  Platform{..} <- fmap toPlatform getEnv
+  Platform{..} <- fmap (basePlatform . toPlatform) getEnv
   blink (Milliseconds 1000) [platformRedLED]
   blink (Milliseconds 666) [platformGreenLED]
 

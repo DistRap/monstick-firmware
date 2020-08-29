@@ -21,12 +21,13 @@ import Monstick.Types
 import Monstick.VT100
 
 app :: (e -> ClockConfig)
-    -> (e -> Platform)
+    -> (e -> MonstickPlatform)
     -> Tower e ()
 app tocc toPlatform = do
   monstickTowerDeps
 
-  Platform{..} <- fmap toPlatform getEnv
+  MonstickPlatform{..} <- fmap toPlatform getEnv
+  let Platform{..} = basePlatform
 
   -- debug
   (ostream, istream) <- bufferedUartTower tocc
@@ -35,8 +36,8 @@ app tocc toPlatform = do
 
   -- RN2483
   (ostreamRadio, istreamRadio) <- bufferedUartTower tocc
-    (radioUART $ platformRadio)
-    (radioUARTPins $ platformRadio)
+    (radioUART radio)
+    (radioUARTPins radio)
     57600 (Proxy :: Proxy UARTBuffer)
 
   istreamLF <- appendCharAfter '\r' '\n' istream
@@ -46,7 +47,7 @@ app tocc toPlatform = do
   p <- period (Milliseconds 1000)
   delayedInit <- once p
 
-  let rstPin = radioResetPin $ platformRadio
+  let rstPin = radioResetPin radio
   monitor "radioEnabler" $ do
     monitorModuleDef $ hw_moduledef
 

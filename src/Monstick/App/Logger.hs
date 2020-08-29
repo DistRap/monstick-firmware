@@ -16,20 +16,21 @@ import Ivory.BSP.STM32.Driver.I2C
 import Ivory.BSP.STM32.ClockConfig (ClockConfig)
 
 import Ivory.Tower.Base
-import Monstick.Platforms
 
 import Ivory.Tower.Drivers.Temperature.SI7006
 import Ivory.Tower.Drivers.Temperature.Types
 
+import Monstick.Platforms
 import Monstick.Types
 
 app :: (e -> ClockConfig)
-    -> (e -> Platform)
+    -> (e -> MonstickPlatform)
     -> Tower e ()
 app tocc toPlatform = do
   monstickTowerDeps
 
-  Platform{..} <- fmap toPlatform getEnv
+  MonstickPlatform{..} <- fmap toPlatform getEnv
+  let Platform{..} = basePlatform
 
   (i2cTransmit, i2cReady) <- i2cTower tocc platformI2C platformI2CPins
 
