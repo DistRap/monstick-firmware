@@ -16,7 +16,7 @@ import Ivory.BSP.STM32.Driver.I2C
 import Ivory.BSP.STM32.ClockConfig (ClockConfig)
 
 import Ivory.Tower.Base.LED (ledToggle)
-import Ivory.Tower.Base.UART
+import Ivory.Tower.Base.UART (bufferedUartTower, puts, putIvoryString, floatingToString, intensityPrompt)
 import Ivory.Tower.Base.Util (fwd, sampler)
 import Monstick.Platforms
 

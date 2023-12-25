@@ -15,9 +15,13 @@ library
   exposed-modules:
                        Monstick.App.Logger
                        Monstick.App.Lorawan
+                       Monstick.Test.ADS
                        Monstick.Test.Blink
                        Monstick.Test.Heater
                        Monstick.Test.RadioCommand
+                       Monstick.Test.RFM
+                       Monstick.Test.RFMInit
+                       Monstick.Test.RFMLoopback
                        Monstick.Test.UARTBridge
                        Monstick.VT100
                        Monstick.Platforms
@@ -39,6 +43,7 @@ library
                      , ivory-bsp-stm32
                      , ivory-tower-base
                      , ivory-tower-cayenne
+                     , ivory-tower-lorawan
                      , ivory-tower-drivers
                      , ivory-tower-helloworld
 
@@ -61,6 +66,13 @@ executable lorawan-gen
 
 -- Tests
 
+executable ads-test-gen
+  main-is:             ADS.hs
+  hs-source-dirs:      test
+  build-depends:       base
+                     , monstick
+  ghc-options:          -Wall
+
 executable blink-test-gen
   main-is:             Blink.hs
   hs-source-dirs:      test
@@ -77,6 +89,27 @@ executable heater-test-gen
 
 executable radiocommand-test-gen
   main-is:             RadioCommand.hs
+  hs-source-dirs:      test
+  build-depends:       base
+                     , monstick
+  ghc-options:          -Wall
+
+executable rfm-test-gen
+  main-is:             RFM.hs
+  hs-source-dirs:      test
+  build-depends:       base
+                     , monstick
+  ghc-options:          -Wall
+
+executable rfm-init-test-gen
+  main-is:             RFMInit.hs
+  hs-source-dirs:      test
+  build-depends:       base
+                     , monstick
+  ghc-options:          -Wall
+
+executable rfm-loopback-test-gen
+  main-is:             RFMLoopback.hs
   hs-source-dirs:      test
   build-depends:       base
                      , monstick

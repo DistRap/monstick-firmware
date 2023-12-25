@@ -6,9 +6,13 @@ APPS       := \
 	lorawan
 
 TESTS      := \
+	ads-test \
 	blink-test \
 	heater-test \
 	radiocommand-test \
+	rfm-test \
+	rfm-init-test \
+	rfm-loopback-test \
 	uartbridge-test
 
 CLEANS     := \

@@ -19,6 +19,7 @@ import Ivory.BSP.STM32.Peripheral.UART
 
 import qualified Ivory.Tower.Base as Base
 import Ivory.Tower.Drivers.Net.RN2483 (defaultRadioConfig)
+import Ivory.Tower.Drivers.SPIDevice (genericSPIDev)
 
 monstickRadio :: Radio
 monstickRadio = Radio {
@@ -66,3 +67,12 @@ monstickMikrobus2 = MikroBUS {
   , mbPWM      = pinA8 -- GPIO0
   , mbRST      = pinB0
   }
+
+mikrobusSPIDev :: String -> MikroBUS -> SPIDevice
+mikrobusSPIDev name mb = genericSPIDev name (mbSPI mb) (mbSPICS mb)
+
+mikrobus_rfm1 :: SPIDevice
+mikrobus_rfm1 = mikrobusSPIDev "rfm95w1" monstickMikrobus1
+
+mikrobus_rfm2 :: SPIDevice
+mikrobus_rfm2 = mikrobusSPIDev "rfm95w2" monstickMikrobus2
